@@ -1,0 +1,7 @@
+.env
+sandbox/*
+*.db
+*.pyc
+
+# Pycharm related files
+.idea/*
