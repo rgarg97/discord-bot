@@ -14,8 +14,11 @@ async def google(ctx: commands.context.Context, keyword: str):
     A Bot command that provides 5 top results from google search and saves the keyword in the DB.
     For example: "!google apple" will search apple in the google and provides results.
     """
-    results = search(keyword, num=5, stop=5)
-    message = "\n".join(list(results))
+    results = list(search(keyword, num=5, stop=5))
+    if results:
+        message = "\n".join(results)
+    else:
+        message = f'Oops, even google cannot found results for "{keyword}"'
     with BotStorage() as storage:
         storage.save_keyword(ctx.author.id, keyword)
     await ctx.send(message)
